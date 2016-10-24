@@ -16,22 +16,12 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := \
-    fmr_core.cpp \
-    fmr_err.cpp \
-    libfm_jni.cpp \
-    common.cpp
+LOCAL_MODULE    := libfmjni
 
-LOCAL_C_INCLUDES := $(JNI_H_INCLUDE) \
-    frameworks/base/include/media
+LOCAL_SRC_FILES := android_fm.cpp \
+                   android_fmradio_Receiver.cpp
 
-LOCAL_SHARED_LIBRARIES := \
-    libcutils \
-    libdl \
-    libmedia \
+LOCAL_REQUIRED_MODULES := libfmradio.v4l2-fm brcm-uim-sysfs
+LOCAL_SHARED_LIBRARIES += liblog libnativehelper
 
-LOCAL_MODULE := libfmjni
-
-ifneq ($(BOARD_USES_QCOM_HARDWARE),true)
 include $(BUILD_SHARED_LIBRARY)
-endif
